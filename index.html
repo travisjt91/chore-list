@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Saturday Family Chores</title>
+  <style>
+    :root{
+      --bg:#f6f7fb;
+      --card:#ffffff;
+      --text:#18202b;
+      --muted:#667085;
+      --line:#e5e7eb;
+      --accent:#111827;
+      --success:#166534;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:var(--bg);
+      color:var(--text);
+    }
+    .wrap{
+      max-width:900px;
+      margin:0 auto;
+      padding:24px 16px 48px;
+    }
+    .hero{
+      background:linear-gradient(135deg,#fff,#eef2ff);
+      border:1px solid var(--line);
+      border-radius:24px;
+      padding:28px;
+      margin-bottom:20px;
+      box-shadow:0 8px 30px rgba(0,0,0,.05);
+    }
+    h1{margin:0 0 8px;font-size:clamp(2rem,6vw,3.4rem);line-height:1}
+    .sub{color:var(--muted);font-size:1rem}
+    .progress{
+      margin-top:18px;
+      height:12px;
+      background:#e5e7eb;
+      border-radius:999px;
+      overflow:hidden;
+    }
+    .progress > div{
+      height:100%;
+      width:0%;
+      background:var(--accent);
+      transition:width .2s ease;
+    }
+    .progress-text{
+      margin-top:8px;
+      font-size:.95rem;
+      color:var(--muted);
+      font-weight:600;
+    }
+    .grid{
+      display:grid;
+      gap:16px;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    }
+    .card{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:20px;
+      padding:20px;
+      box-shadow:0 6px 20px rgba(0,0,0,.04);
+    }
+    .card h2{
+      margin:0 0 14px;
+      font-size:1.35rem;
+    }
+    .task{
+      display:flex;
+      align-items:flex-start;
+      gap:10px;
+      padding:10px 0;
+      border-bottom:1px solid #f1f3f5;
+      cursor:pointer;
+    }
+    .task:last-child{border-bottom:none}
+    .task input{
+      width:22px;height:22px;margin-top:1px;
+      accent-color:#111827;
+      flex:0 0 auto;
+    }
+    .task span{line-height:1.35}
+    .task.done span{
+      text-decoration:line-through;
+      color:#98a2b3;
+    }
+    .bonus{
+      margin-top:20px;
+    }
+    .bonus .card{border-style:dashed}
+    .note{
+      color:var(--muted);
+      font-size:.92rem;
+      margin:-6px 0 10px;
+    }
+    .footer{
+      text-align:center;
+      margin-top:22px;
+      padding:20px;
+      font-weight:800;
+      font-size:1.2rem;
+    }
+    .controls{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:16px;
+    }
+    button{
+      border:0;
+      border-radius:12px;
+      padding:10px 14px;
+      font-weight:700;
+      cursor:pointer;
+      background:#111827;
+      color:white;
+    }
+    button.secondary{
+      background:#e5e7eb;
+      color:#111827;
+    }
+    @media print{
+      body{background:white}
+      .controls{display:none}
+      .card,.hero{box-shadow:none}
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <h1>🏠 Saturday Family Chores</h1>
+      <div class="sub">Everybody helps. When the list is done, Saturday chores are over.</div>
+      <div class="progress"><div id="bar"></div></div>
+      <div class="progress-text" id="progressText">0% complete</div>
+      <div class="controls">
+        <button onclick="window.print()">Print</button>
+        <button class="secondary" onclick="resetAll()">Reset Checkboxes</button>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <h2>👨 Dad</h2>
+        <label class="task"><input type="checkbox"><span>Mow / edge / basic yard cleanup</span></label>
+        <label class="task"><input type="checkbox"><span>Take out all trash & recycling</span></label>
+        <label class="task"><input type="checkbox"><span>Clean garage / put stray items away</span></label>
+        <label class="task"><input type="checkbox"><span>Vacuum main living areas</span></label>
+        <label class="task"><input type="checkbox"><span>Mop hard floors</span></label>
+        <label class="task"><input type="checkbox"><span>Do one house-maintenance project</span></label>
+        <label class="task"><input type="checkbox"><span>Clean up anything that's been sitting around all week</span></label>
+      </div>
+
+      <div class="card">
+        <h2>🧒 6-Year-Old</h2>
+        <label class="task"><input type="checkbox"><span>Clean bedroom floor</span></label>
+        <label class="task"><input type="checkbox"><span>Make bed</span></label>
+        <label class="task"><input type="checkbox"><span>Put dirty clothes in hamper</span></label>
+        <label class="task"><input type="checkbox"><span>Put toys & books where they belong</span></label>
+        <label class="task"><input type="checkbox"><span>Empty bedroom/bathroom trash cans</span></label>
+        <label class="task"><input type="checkbox"><span>Wipe bathroom sink & counter</span></label>
+        <label class="task"><input type="checkbox"><span>Empty dishwasher silverware</span></label>
+        <label class="task"><input type="checkbox"><span>Help Dad outside for 10–15 minutes</span></label>
+      </div>
+
+      <div class="card">
+        <h2>👧 4-Year-Old</h2>
+        <label class="task"><input type="checkbox"><span>Clean up bedroom toys</span></label>
+        <label class="task"><input type="checkbox"><span>Put dirty clothes in hamper</span></label>
+        <label class="task"><input type="checkbox"><span>Help make bed</span></label>
+        <label class="task"><input type="checkbox"><span>Put shoes away</span></label>
+        <label class="task"><input type="checkbox"><span>Pick up toys in family room</span></label>
+        <label class="task"><input type="checkbox"><span>Wipe kitchen table</span></label>
+        <label class="task"><input type="checkbox"><span>Match socks</span></label>
+        <label class="task"><input type="checkbox"><span>Help Dad outside for 5–10 minutes</span></label>
+      </div>
+
+      <div class="card">
+        <h2>👶 1½-Year-Old</h2>
+        <label class="task"><input type="checkbox"><span>Put toys in the toy bin</span></label>
+        <label class="task"><input type="checkbox"><span>Put books on shelf</span></label>
+        <label class="task"><input type="checkbox"><span>Carry dirty clothes to hamper</span></label>
+        <label class="task"><input type="checkbox"><span>Throw away a few pieces of safe trash</span></label>
+        <label class="task"><input type="checkbox"><span>Carry a diaper to the trash</span></label>
+        <label class="task"><input type="checkbox"><span>Follow everyone around undoing approximately 30% of their work 😂</span></label>
+      </div>
+    </section>
+
+    <section class="bonus">
+      <div class="card">
+        <h2>💰 Bonus Chores</h2>
+        <div class="note">Regular chores have to be finished first.</div>
+        <label class="task"><input type="checkbox"><span>Wipe baseboards — $1</span></label>
+        <label class="task"><input type="checkbox"><span>Clean fingerprints off doors — $1</span></label>
+        <label class="task"><input type="checkbox"><span>Organize shoe area — $1</span></label>
+        <label class="task"><input type="checkbox"><span>Pick up sticks/leaves outside — $1</span></label>
+        <label class="task"><input type="checkbox"><span>Vacuum stairs with Dad — $1</span></label>
+        <label class="task"><input type="checkbox"><span>Clean out one toy bin — $1</span></label>
+      </div>
+    </section>
+
+    <div class="footer" id="doneMessage">🎉 Finish the list, then enjoy Saturday.</div>
+  </main>
+
+  <script>
+    const checks = [...document.querySelectorAll('input[type="checkbox"]')];
+    const bar = document.getElementById('bar');
+    const progressText = document.getElementById('progressText');
+    const doneMessage = document.getElementById('doneMessage');
+
+    function saveState(){
+      localStorage.setItem('saturdayChores', JSON.stringify(checks.map(c => c.checked)));
+    }
+
+    function update(){
+      checks.forEach(c => c.closest('.task').classList.toggle('done', c.checked));
+      const done = checks.filter(c => c.checked).length;
+      const pct = Math.round((done / checks.length) * 100);
+      bar.style.width = pct + '%';
+      progressText.textContent = `${pct}% complete (${done}/${checks.length})`;
+      doneMessage.textContent = pct === 100
+        ? '🎉 CHORES DONE! Saturday chores are OVER.'
+        : '🎉 Finish the list, then enjoy Saturday.';
+      saveState();
+    }
+
+    function resetAll(){
+      checks.forEach(c => c.checked = false);
+      update();
+    }
+
+    checks.forEach(c => c.addEventListener('change', update));
+
+    const saved = JSON.parse(localStorage.getItem('saturdayChores') || '[]');
+    saved.forEach((v,i) => { if(checks[i]) checks[i].checked = v; });
+    update();
+  </script>
+</body>
+</html>
